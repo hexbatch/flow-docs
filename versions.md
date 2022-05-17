@@ -96,7 +96,15 @@ Then
 * when name changes do simple text replacement (using regex for word boundaries)
 * when tag or entry deleted, find the xpaths and mark them as invalid (tag given attribute to show xpath is invalid)
 
-## 0.6.4 Web of things
+## 0.6.4 Edit Views
+
+When seeing a view, can edit parts of it in the bb editor and save the original.
+* Entering an editing mode for a view, the different tag source areas are shown in different subtle color hints
+* Clicking on something to edit that is colorized will open a bb editor in place 
+* Saving the changes will update that part of the document it is from
+* If any other views are using that part, they will be updated too
+
+## 0.6.5 Web of things
 
 Make a new web control and api to navigate through the connections of bookmarks.
 
@@ -111,7 +119,7 @@ Two views:
 in both, can show the entry or view, either in a new tab, or somehow displayed along with the dots
 
 
-## 0.6.5 Resources
+## 0.6.6 Resources
 
 Adds entry level resources and easy insertion and use (pictures, movies, pdf, etc). These are stored in the entry folders so can be moved around to different projects better
 
