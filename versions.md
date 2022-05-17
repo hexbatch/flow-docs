@@ -11,6 +11,8 @@ Earlier, was not sure what roles to give these applied and attributes. But now, 
 * Add a tagged_flow_tag_id to applied
 * move the settings over to be held there instead of the applied points_to_tag_id
 * Remove points_to_entry_id ,points_to_user_id ,points_to_project_id ,points_to_tag_id from attributes
+* update the gui to not show links to the applied
+* add tag link display for applied (what it points too, and its name)
 
 
 
