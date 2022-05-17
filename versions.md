@@ -27,18 +27,34 @@ CSS like selectors for manipulating entries. CSS normally has three things, clas
 * **pseudo classes** are the tag standards, will match if the selection has one tag that has this standard
 * **indirect links** sometimes we want to select based on where the entry is on the web of connections (connected to A and B), or even (connected to A via C connect three times to B), (or select what B points to)
 
-How to select using these rules
+Will use embedded lua functions to combine and search as needed. I wanted xpath or css rules, but realized later I needed a callback for each in the rule string, and finding a ready made parser in php was problematic. Also, looking back, such an approach would be harder to implement and honestly provide some restrictions in search (because I will do rules for indirectness between both tags and entries not covered)
 
-* Put the tag names into the parent elements as classes in the html (with standards being special classes) and use an existing html parser that takes a xpath to find html. Then take those html fragments, and convert them to the needed tag guids and bb code parts and then do the packaging and substitution there as normal
-* When selecting via relationship, here we will put in the html document some valid html with attributes that lets us select this. The xpath rule for this will probably be bulky , but the easy selector used by me (or others) can be pre-processed to the formal rule just like the above. For more complicated indirect links probably have to do extra filtering and steps
-    * Can preprocess the selection string to be valid xpath, so image:image-info becomes img.standard-image-info etc
-    * take use regular expressions in the xpath to find all the identities and tag guids/names to do filtering of possible things to look for
-    * then in the filtered set let the xpath dom library find things from an array of file paths
-    * use the found items as normal
-* Create new api point to process these selections and return the html to render
-* Other commands to manipulate entries can also be done (not defined yet). But want to use a command library (used for console program command switches and toggles) to make it easy to maintain the interface from the  params (query string or posted options)
 
-There are libraries to convert css to xpath, but I do not know if I want to have that extra layer there because they have constraints maybe ? Also, not sure if working with css selectors is better than xpath, for normal use? but there is https://css2xpath.github.io/ and similar
+Lua sandbox is supposed to run on 8.1
+* https://www.php.net/book.luasandbox
+* https://www.mediawiki.org/wiki/LuaSandbox
+* https://www.lua.org/ftp/lua-5.1.5.tar.gz 
+* https://www.lua.org/manual/5.1/  (and ordered paper book)
+
+In the php 
+
+* Each lua callback will return a found array of strings, representing sets found.
+* These strings are guids that match keys holding the values to use in php.
+* The php embedded functions will accept a string or string array of either a new query or one of the guids from a previous query and will always return an array
+* If more than one selection guid in an array, passed to a function, these are always treated as unions
+
+In the lua
+
+* The lua will be able to select one or more things from any rules as a selection to use 
+* The lua can use any number of selections, at any point in its program and they can be sources or targets or both
+* Any set of selections already made, can be filtered again to make other selections from them
+* At any point, any selection can be a source, to lift the content from, or a target to apply the content too, or both  
+* If applying a source to itself as target, this will raise an exception that can be handled in lua.
+* If duplicates in the arrays
+* The php will be building this as the lua progresses, and when the lua ends will send the resulting bb code to be converted to html  
+
+There will be a new api function that allows sending in lua to a project to do the above, It will always return html
+
 
 ## 0.6.3 Bookmarks
 
