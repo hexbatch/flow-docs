@@ -1,19 +1,4 @@
-# 0.6 changes bring up entries to be fully usable
-
-at the end of this, can fully organize ideas in 2d
-
-## 0.6.1 Goodbye Attribute Pointers
-
-Small but needed
-
-Earlier, was not sure what roles to give these applied and attributes. But now, attributes hold standards and data, and applied links stuff: two well-defined roles. The attributes of points_to is only used in one place now
-
-* Add a tagged_flow_tag_id to applied
-* move the settings over to be held there instead of the applied points_to_tag_id
-* Remove points_to_entry_id ,points_to_user_id ,points_to_project_id ,points_to_tag_id from attributes
-* update the gui to not show links to the applied
-* add tag link display for applied (what it points too, and its name)
-
+# Roadmap for planned versions
 
 
 ## 0.6.2 Selections
